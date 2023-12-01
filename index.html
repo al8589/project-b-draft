@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <meta charset="utf-8" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wandering</title>  
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+  <script src="lib/p5.js"></script>
+  <script src="lib/p5.sound.js"></script>
 </head>
-
 <body>
-  <script src="Rain.js"></script>
+  <h1 id="title">Wandering</h1>
+  
+  <div id="canvasWrapper">
+    <!-- p5 canvas will be appended here. -->
+  </div>
+    
+  <p>Rain... did I fall asleep? Where am I? It's cold...</p>
+  <button id="wakeUpButton" onclick="location.href='page2.html';">Wake Up</button>
+  <!-- your script file should be included at the end of the body tag -->
+  <!-- so that it can manipulate HTML elements above. -->
+  <script src="rain.js"></script>
   <script src="script.js"></script>
 </body>
-
 </html>
