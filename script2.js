@@ -9,6 +9,8 @@ function preload() {
 }
 
 function setup() {
+    let canvas = createCanvas(windowWidth, windowHeight);
+    canvas.style('display', 'block');
   createCanvas(600, 400);
   player = new Player();
 

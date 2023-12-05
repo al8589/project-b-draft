@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* This will prevent scrollbars if the canvas is larger than the window */
+    background-color: #000; /* Or any other color you wish for the background */
+  }
+  
+  .text-container h1 {
+    color: white; /* This will make your text white */
+    font-family: 'Nanum Pen Script', cursive; /* Ensure this matches the font you want */
+  }
