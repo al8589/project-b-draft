@@ -2,39 +2,41 @@ let player;
 let trees = [];
 let treeCount = 65;
 
-let treeImage; // A variable to hold the tree image
+let treeImage;
+let mySound; // Declare the sound variable here
 
 function preload() {
-  treeImage = loadImage('treetop.webp'); // Make sure to provide the correct path to your tree image
+  treeImage = loadImage('treetop.webp');
+  mySound = loadSound("lib/sound/forestrain.wav");
 }
 
 function setup() {
-    let canvas = createCanvas(windowWidth, windowHeight);
-    canvas.style('display', 'block');
-  createCanvas(600, 400);
+  let canvas = createCanvas(windowWidth, windowHeight);
+  canvas.style('display', 'block');
+  background(0);
   player = new Player();
 
-  // Generate some trees at random locations
   for (let i = 0; i < treeCount; i++) {
-    let tree = new Tree(random(width), random(height), 20); // 20 is the tree radius
+    let tree = new Tree(random(width), random(height), 20);
     trees.push(tree);
   }
+mySound.play();
 }
 
 function draw() {
-  background(51, 43, 42);
+  if (!mySound.isPlaying()) {
+    mySound.loop();
+  }
+  clear();
 
-  // Display and check collision for all trees
   for (let tree of trees) {
     tree.display();
     player.collide(tree);
   }
 
-  // Update and display the player
   player.update();
   player.display();
 }
-
 
 function keyPressed() {
   if (keyCode === UP_ARROW) {
@@ -55,24 +57,23 @@ function keyReleased() {
   if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
     player.stopX();
   }
-  return false; // Prevent default behavior
+  return false;
 }
 
 class Player {
   constructor() {
     this.x = width / 2;
     this.y = height / 2;
-    this.size = 25; // Size of the bird head
+    this.size = 25;
     this.speedX = 0;
     this.speedY = 0;
-    this.direction = 'down'; // Initial direction
+    this.direction = 'down';
   }
 
   update() {
     this.x += this.speedX;
     this.y += this.speedY;
 
-    // Update direction based on the movement
     if (this.speedX > 0) this.direction = 'left';
     else if (this.speedX < 0) this.direction = 'right';
     else if (this.speedY > 0) this.direction = 'up';
@@ -80,37 +81,32 @@ class Player {
   }
 
   display() {
-    fill(122, 31, 20); // Color for the bird
+    fill(122, 31, 20);
     noStroke();
 
-    // Draw the head (circle)
     ellipse(this.x, this.y, this.size, this.size);
 
-    // Draw the beak-shaped hood (diamond-ish shape)
     this.drawBeak();
   }
-   drawBeak() {
-    const beakWidth = this.size * 1; // Width of the beak
-    const beakHeight = this.size * 1.3; // Height of the beak
-    const beakOffsetX = this.size * -0.4; // Horizontal offset of the beak from the center of the circle
-    const beakOffsetY = 0; // Vertical offset of the beak from the center of the circle
+  
+  drawBeak() {
+    const beakWidth = this.size * 1;
+    const beakHeight = this.size * 1.3;
+    const beakOffsetX = this.size * -0.4;
+    const beakOffsetY = 0;
 
-    push(); // Save the current state of the canvas
-    translate(this.x, this.y); // Move the origin to the player's location
-    rotate(this.getBeakDirection()); // Rotate based on direction
+    push();
+    translate(this.x, this.y);
+    rotate(this.getBeakDirection());
 
-    // Draw the beak as a rounded triangle
-    fill(150, 35, 21); 
-     beginShape();
-    // Point of the beak
+    fill(150, 35, 21);
+    beginShape();
     vertex(beakOffsetX + beakWidth, beakOffsetY);
-    // Bottom right curve
     quadraticVertex(beakOffsetX + beakWidth / 2, beakOffsetY + beakHeight, beakOffsetX, beakOffsetY);
-    // Top right curve
     quadraticVertex(beakOffsetX + beakWidth / 2, beakOffsetY - beakHeight, beakOffsetX + beakWidth, beakOffsetY);
     endShape(CLOSE);
 
-    pop(); // Restore the state of the canvas
+    pop();
   }
 
   getBeakDirection() {
@@ -121,7 +117,6 @@ class Player {
     } else if (this.direction === 'down') {
       return HALF_PI;
     }
-    // Default rotation for 'up'
     return -HALF_PI;
   }
 
@@ -148,20 +143,15 @@ class Player {
   }
 }
 
-
 class Tree {
   constructor(x, y, radius) {
     this.x = x;
     this.y = y;
     this.radius = radius;
-    // If the images are not too big and there are not too many, you can assign the image to each tree.
-    // Otherwise, consider using a static class variable to hold the image to save memory.
   }
 
   display() {
-    // imageMode(CENTER) ensures that the image is drawn centered on (this.x, this.y)
     imageMode(CENTER);
-    // Draws the image at the tree's location with the specified width and height
     image(treeImage, this.x, this.y, this.radius * 3, this.radius * 3);
   }
 }

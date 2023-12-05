@@ -6,6 +6,7 @@ body {
   }
   
   .text-container h1 {
-    color: white; /* This will make your text white */
-    font-family: 'Nanum Pen Script', cursive; /* Ensure this matches the font you want */
+    color: white; 
+    font-family: 'Nanum Pen Script', cursive; 
+    text-align: center;
   }
