@@ -1,18 +1,31 @@
+console.log("Script started"); // Log to check if the script file is loaded
+
 let player;
 let trees = [];
 let treeCount = 65;
 
-let treeImage;
 let mySound; // Declare the sound variable here
+let treeImage;
 
 function preload() {
-  treeImage = loadImage('treetop.webp');
-  mySound = loadSound("lib/sound/forestrain.wav");
+  console.log("Preloading assets"); // Log to check if preload is called
+  mySound = loadSound("lib/sound/forestrain.wav", function() {
+    console.log("Sound loaded successfully"); // Log on successful load
+  }, function(error) {
+    console.error("Error loading sound:", error); // Log if there is an error
+  });
+  treeImage = loadImage('treetop.webp', function() {
+    console.log("Image loaded successfully"); // Log on successful load
+  }, function(error) {
+    console.error("Error loading image:", error); // Log if there is an error
+  });
 }
 
 function setup() {
+  console.log("Setting up canvas"); // Log to check if setup is called
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.style('display', 'block');
+  canvas.parent('canvasWrapper'); // Ensure canvas is inserted into the right container
   background(0);
   player = new Player();
 
@@ -20,13 +33,17 @@ function setup() {
     let tree = new Tree(random(width), random(height), 20);
     trees.push(tree);
   }
-mySound.play();
+
+  // Play sound with user interaction
+  window.addEventListener('click', function() {
+    if (!mySound.isPlaying()) {
+      mySound.loop();
+      console.log("Sound played on click"); // Log to confirm sound plays on click
+    }
+  });
 }
 
 function draw() {
-  if (!mySound.isPlaying()) {
-    mySound.loop();
-  }
   clear();
 
   for (let tree of trees) {
@@ -37,6 +54,7 @@ function draw() {
   player.update();
   player.display();
 }
+
 
 function keyPressed() {
   if (keyCode === UP_ARROW) {
