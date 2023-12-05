@@ -4,7 +4,7 @@ var speed;
 let mySound;
 
 function preload() {
-  mySound = loadSound("lib/sound/forestrain.wav");
+  mySound = loadSound("lib/sound/forestrain.wav"); 
 }
 
 function setup() {
