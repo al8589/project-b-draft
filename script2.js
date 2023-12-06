@@ -14,7 +14,7 @@ function preload() {
   }, function(error) {
     console.error("Error loading sound:", error); // Log if there is an error
   });
-  treeImage = loadImage('darktree.jpg', function() {
+  treeImage = loadImage('darktree.png', function() {
     console.log("Image loaded successfully"); // Log on successful load
   }, function(error) {
     console.error("Error loading image:", error); // Log if there is an error
