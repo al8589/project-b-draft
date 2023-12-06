@@ -2,11 +2,12 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden; /* This will prevent scrollbars if the canvas is larger than the window */
-    background-color: #000; /* Or any other color you wish for the background */
   }
   
   .text-container h1 {
     color: white; 
     font-family: 'Nanum Pen Script', cursive; 
     text-align: center;
+    position: relative; /* Add position to use z-index */
+    z-index: 10; /* Ensure the text container is above the canvas */
   }

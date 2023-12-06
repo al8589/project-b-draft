@@ -14,7 +14,7 @@ function preload() {
   }, function(error) {
     console.error("Error loading sound:", error); // Log if there is an error
   });
-  treeImage = loadImage('treetop.webp', function() {
+  treeImage = loadImage('darktree.jpg', function() {
     console.log("Image loaded successfully"); // Log on successful load
   }, function(error) {
     console.error("Error loading image:", error); // Log if there is an error
@@ -26,7 +26,7 @@ function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.style('display', 'block');
   canvas.parent('canvasWrapper'); // Ensure canvas is inserted into the right container
-  background(0);
+  clear();
   player = new Player();
 
   for (let i = 0; i < treeCount; i++) {
@@ -44,7 +44,7 @@ function setup() {
 }
 
 function draw() {
-  clear();
+  background(33, 26, 23);
 
   for (let tree of trees) {
     tree.display();
@@ -104,7 +104,7 @@ class Player {
 
     ellipse(this.x, this.y, this.size, this.size);
 
-    this.drawBeak();
+    this.drawBeak(); // hood reminds me of a beak/bill shape
   }
   
   drawBeak() {
