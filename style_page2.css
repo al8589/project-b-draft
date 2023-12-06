@@ -9,5 +9,5 @@ body {
     font-family: 'Nanum Pen Script', cursive; 
     text-align: center;
     position: relative; /* Add position to use z-index */
-    z-index: 10; /* Ensure the text container is above the canvas */
+    z-index: 20; /* Ensure the text container is above the canvas */
   }
